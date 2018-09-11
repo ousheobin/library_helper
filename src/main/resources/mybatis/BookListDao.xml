@@ -1,0 +1,47 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd//mybatis-3-mapper.dtd">
+<mapper namespace="BookListDao">
+	
+	<insert id="addBookList" parameterType="BookListEntity">
+		INSERT INTO tb_book_list(f_id,f_user_id,f_book_name,f_book_numer,f_mark_time,f_is_delete,f_delete_time,f_is_back,f_book_source) 
+		VALUES(#{id},#{user.id},#{bookName},#{bookNumber},#{markTime},0,#{deleteTime},#{isBack},#{bookSource});
+	</insert>
+	
+	<update id="updateBookList" parameterType="BookListEntity">
+		UPDATE tb_book_list SET
+		f_user_id = #{user.id},
+		f_book_name = #{bookName},
+		f_book_numer = #{bookNumber},
+		f_mark_time = #{markTime},
+		f_is_delete = #{isDelete},
+		f_delete_time = #{deleteTime},
+		f_is_back = #{isBack},
+		f_book_source = #{bookSource}
+		WHERE f_id = #{id};
+	</update>
+	
+	<select id="selectByUserId" resultMap="bookListMapper" resultType="BookListEntity">
+		SELECT f_id,f_user_id,f_book_name,f_book_numer,f_mark_time,f_is_delete,f_delete_time,f_is_back,f_book_source
+		FROM tb_book_list
+		WHERE f_user_id = #{userId} AND f_is_delete = 0 ;
+	</select>
+	
+	<select id="getAllNotExistsBook" resultMap="bookListMapper" resultType="BookListEntity">
+		SELECT f_id,f_user_id,f_book_name,f_book_numer,f_mark_time,f_is_delete,f_delete_time,f_is_back,f_book_source
+		FROM tb_book_list
+		WHERE f_is_delete = 0 AND f_is_back = 0 AND f_user_id = #{userId} ;
+	</select>
+	
+	<resultMap type="BookListEntity" id="bookListMapper">
+		<id column="f_id" property="id"/>
+		<result column="f_book_name" property="bookName"/>
+		<result column="f_book_numer" property="bookNumber"/>
+		<result column="f_mark_time" property="markTime"/>
+		<result column="f_is_delete" property="isDelete"/>
+		<result column="f_delete_time" property="deleteTime"/>
+		<result column="f_is_back" property="isBack"/>
+		<result column="f_book_source" property="bookSource"/>
+		<association property="user" select="UserDao.queryUserById" column="f_user_id"/>
+	</resultMap>
+
+</mapper>

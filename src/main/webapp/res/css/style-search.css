@@ -1,0 +1,14 @@
+.footer {
+  margin: 50px;
+  bottom: 5px;
+  text-align: center;
+  font-size: 10px
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+input {
+  text-align: center;
+}

@@ -1,0 +1,30 @@
+.footer {
+  margin: 50px;
+  bottom: 5px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.bookname{
+	width:60%;
+}
+
+.number{
+	width:25%;
+}
+
+.remove{
+	width:15%;
+}
+
+.remove td,.remove th{
+	text-align: center;
+}
+
+.table{
+	table-layout: fixed;
+}
+
+.table td{
+    word-wrap: break-word;
+}

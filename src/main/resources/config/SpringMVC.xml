@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"  
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="  http://www.springframework.org/schema/beans  
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+		http://www.springframework.org/schema/context  
+      	http://www.springframework.org/schema/context/spring-context.xsd  
+		http://www.springframework.org/schema/tx  
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+		http://www.springframework.org/schema/mvc  
+	    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/aop  
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+		http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<!-- 扫描控制器包-->
+	<context:component-scan base-package="com.tentcoo.controller"/>
+	<!-- 扫描业务逻辑包 -->
+	<context:component-scan base-package="com.tentcoo.service.*"/>
+	<!-- 扫描图书馆相关资源包  -->
+	<context:component-scan base-package="com.tentcoo.library.*"/>
+	<!-- 扫描金蝶云之家平台相关包 -->
+	<context:component-scan base-package="com.tentcoo.platform"/>
+	<!-- 扫描金蝶云之家消息相关包 -->
+	<context:component-scan base-package="com.tentcoo.message"/>
+	<!-- 扫描金蝶云之家定时任务相关包 -->
+	<context:component-scan base-package="com.tentcoo.schedule"/>
+    <!-- 静态资源准许规则 -->
+    <mvc:resources location="/res/"  mapping="/res/**"  cache-period="0" />
+    <mvc:resources location="/errorPage/"  mapping="/errorPage/**"  cache-period="0" />
+    
+    <!-- JSON 序列化与反序列化 -->
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+	<!-- 配置Viewer-->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	<!-- 配置文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+	</bean>
+	
+	<!-- 配置SpringMvc注解 -->
+	<mvc:annotation-driven/>
+	
+	<!--Restful服务远程调用连接工厂 -->
+	<bean id="requestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+		<property name="readTimeout" value="10000" />
+		<property name="connectTimeout" value="5000" />
+	</bean>
+	
+	<!-- Restful请求接口 -->
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="requestFactory"/>
+    </bean>
+    
+    <!-- 启用任务注解 -->
+	<task:annotation-driven />
+	
+</beans>

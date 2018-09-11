@@ -1,0 +1,24 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd//mybatis-3-mapper.dtd">
+<mapper namespace="RecordDao">
+
+	<insert id="addRecord" parameterType="RecordEntity">
+		INSERT INTO tb_search_record(f_id,f_user_id,f_key_word,f_search_time,f_user_agent) 
+		VALUES (#{id},#{user.id},#{keyword},#{searchTime},#{userAgent});
+	</insert>
+	
+	<select id="selectCountList" resultMap="RankDtoMap" >
+		SELECT f_key_word,COUNT(*) AS f_times
+		FROM tb_search_record
+		WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f_search_time)
+		GROUP BY f_key_word 
+		ORDER BY f_times DESC
+		LIMIT 10;
+	</select>
+	
+	<resultMap type="RankDto" id="RankDtoMap">
+		<result column="f_key_word" property="keyWord"/>
+		<result column="f_times" property="times"/>
+	</resultMap>
+
+</mapper>

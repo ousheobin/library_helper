@@ -1,0 +1,30 @@
+.footer {
+  margin: 50px;
+  bottom: 5px;
+  text-align: center;
+  font-size: 10px
+}
+
+.goback a {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.title {
+  margin: 20px 0px 0px 0px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  color: #505050;
+  background: #dedede;
+  font-weight: bold;
+}
+
+.item-title{
+	min-width:100px;
+}
+
+.borrows td,th{
+	text-align:center;
+}
