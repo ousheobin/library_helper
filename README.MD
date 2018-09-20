@@ -2,6 +2,8 @@
 
 **Notice: 伴随新图书馆的系统上线，查书更加方便，抓页面查询已经不可用，此项目仅供参考~**
 
+[![Build Status](https://www.travis-ci.org/ousheobin/library_helper.svg?branch=master)](https://www.travis-ci.org/ousheobin/library_helper) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/711c6f196fd04f64be3862d91f4ad440)](https://www.codacy.com/app/ousheobin/library_helper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ousheobin/library_helper&amp;utm_campaign=Badge_Grade)
+
 ## 作者 ##
 
 - Shaobin.Ou
